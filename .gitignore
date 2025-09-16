@@ -1,0 +1,6 @@
+taxisharing/
+__pycache__/
+*.pyc
+db.sqlite3
+.taxisharing
+*.log
