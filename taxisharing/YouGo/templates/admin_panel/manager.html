@@ -1,0 +1,84 @@
+{% extends 'sitemaster.html' %}
+{% load static %}
+{% block title %}Managers{% endblock %}
+
+{% block content %}
+<style>
+  .section-heading {
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+  }
+
+  .manager-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .manager-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .manager-table thead {
+    background-color: #0d6efd;
+    color: white;
+  }
+
+  .search-box {
+    max-width: 300px;
+  }
+
+  .manager-icon {
+    font-size: 1.5rem;
+    color: #0d6efd;
+  }
+</style>
+
+<div class="container mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="section-heading">Manager Directory</h2>
+    <form method="get" class="d-flex search-box">
+      <input type="text" class="form-control me-2" placeholder="Search manager..." name="search">
+      <button type="submit" class="btn btn-outline-primary">Search</button>
+    </form>
+  </div>
+
+  <div class="manager-card">
+    {% if managers %}
+      <div class="table-responsive">
+        <table class="table manager-table table-hover align-middle">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Department</th>
+              <th scope="col">Email</th>
+              <th scope="col">Phone</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for manager in managers %}
+              <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td>
+                  <i class="bi bi-person-circle manager-icon me-2"></i>
+                  {{ manager.full_name }}
+                </td>
+                <td>{{ manager.department }}</td>
+                <td>{{ manager.email }}</td>
+                <td>{{ manager.phone }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted">No managers found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

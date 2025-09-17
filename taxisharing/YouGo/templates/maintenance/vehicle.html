@@ -1,0 +1,118 @@
+{% extends 'sitemaster.html' %}
+{% load static %}
+{% block title %}Vehicles{% endblock %}
+
+{% block content %}
+<style>
+  .section-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .vehicle-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .vehicle-table thead {
+    background-color: #ffc107;
+    color: #212529;
+  }
+
+  .vehicle-table tbody tr:hover {
+    background-color: #fff8e1;
+  }
+
+  .status-available {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .status-maintenance {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .status-service {
+    background-color: #cff4fc;
+    color: #055160;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .vehicle-photo {
+    width: 50px;
+    height: 35px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-right: 8px;
+  }
+</style>
+
+<div class="container mb-5">
+  <h2 class="section-title">Vehicle Management</h2>
+
+  <div class="vehicle-card">
+    {% if vehicles %}
+      <div class="table-responsive">
+        <table class="table vehicle-table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Vehicle</th>
+              <th>Model</th>
+              <th>Plate Number</th>
+              <th>Capacity</th>
+              <th>Status</th>
+              <th>Last Serviced</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for v in vehicles %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="d-flex align-items-center">
+                  {% if v.photo %}
+                    <img src="{{ v.photo.url }}" class="vehicle-photo" alt="Vehicle">
+                  {% else %}
+                    <img src="{% static 'images/vehicle-placeholder.png' %}" class="vehicle-photo" alt="Vehicle">
+                  {% endif %}
+                  {{ v.name }}
+                </td>
+                <td>{{ v.model }}</td>
+                <td>{{ v.plate_number }}</td>
+                <td>{{ v.capacity }}</td>
+                <td>
+                  {% if v.status == 'Available' %}
+                    <span class="status-available">Available</span>
+                  {% elif v.status == 'In Service' %}
+                    <span class="status-service">In Service</span>
+                  {% else %}
+                    <span class="status-maintenance">Maintenance</span>
+                  {% endif %}
+                </td>
+                <td>{{ v.last_serviced|date:"M d, Y" }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted">No vehicles found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

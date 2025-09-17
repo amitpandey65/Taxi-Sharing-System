@@ -1,0 +1,108 @@
+{% extends 'sitemaster.html' %}
+{% load static %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<style>
+  .hero-section {
+    background: url("{% static 'images/hero.jpg' %}") no-repeat center center;
+    background-size: cover;
+    min-height: 80vh;
+    border-radius: 12px;
+    padding: 4rem 2rem;
+    color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-hover:hover {
+    transform: scale(1.03);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+</style>
+
+<div class="container hero-section text-center">
+  <h1 class="hero-title mb-3">Welcome to the Taxi Sharing System</h1>
+  <p class="hero-subtitle">Manage travel, employees, vehicles, billing, and more from one dashboard.</p>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+    <div class="col">
+      <a href="{% url 'admin_panel' %}" class="text-decoration-none">
+        <div class="card border-primary card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Admin Panel</h5>
+            <p class="card-text">Manage system administrators and access settings.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'hr' %}" class="text-decoration-none">
+        <div class="card border-info card-hover">
+          <div class="card-body">
+            <h5 class="card-title">HR</h5>
+            <p class="card-text">Employee management, shift allocation, and profiles.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'finance' %}" class="text-decoration-none">
+        <div class="card border-success card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Finance</h5>
+            <p class="card-text">View invoices, billing statements, and expenses.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'maintenance' %}" class="text-decoration-none">
+        <div class="card border-warning card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Maintenance</h5>
+            <p class="card-text">Vehicle servicing, repairs, and parts tracking.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'movement' %}" class="text-decoration-none">
+        <div class="card border-danger card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Movement</h5>
+            <p class="card-text">Trip scheduling and employee travel planning.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="col">
+      <a href="{% url 'quality' %}" class="text-decoration-none">
+        <div class="card border-dark card-hover">
+          <div class="card-body">
+            <h5 class="card-title">Quality</h5>
+            <p class="card-text">Feedback, safety reporting, and audits.</p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

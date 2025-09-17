@@ -1,0 +1,27 @@
+body {
+  background: #f8f9fa;
+  padding-top: 80px;
+}
+
+.navbar-brand img {
+  border-radius: 10px;
+}
+
+.main-content {
+  padding: 2rem;
+  background-image: url('../images/hero.jpg');
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  min-height: 75vh;
+  color: #fff;
+  backdrop-filter: brightness(0.8);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.table {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}

@@ -1,0 +1,90 @@
+{% extends 'sitemaster.html' %}
+{% load static %}
+{% block title %}Billing Dashboard{% endblock %}
+
+{% block content %}
+<style>
+  .section-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .bill-card {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .bill-table thead {
+    background-color: #198754;
+    color: #fff;
+  }
+
+  .bill-table tbody tr:hover {
+    background-color: #f0fdf4;
+  }
+
+  .status-paid {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .status-pending {
+    background-color: #fff3cd;
+    color: #664d03;
+    padding: 0.25rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+</style>
+
+<div class="container mb-5">
+  <h2 class="section-title">Finance - Billing Records</h2>
+
+  <div class="bill-card">
+    {% if bills %}
+      <div class="table-responsive">
+        <table class="table bill-table align-middle table-hover">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Invoice No.</th>
+              <th>Client Name</th>
+              <th>Date Issued</th>
+              <th>Amount (₹)</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for bill in bills %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ bill.invoice_number }}</td>
+                <td>{{ bill.client_name }}</td>
+                <td>{{ bill.issue_date|date:"M d, Y" }}</td>
+                <td>₹{{ bill.amount|floatformat:2 }}</td>
+                <td>
+                  {% if bill.status == 'Paid' %}
+                    <span class="status-paid">Paid</span>
+                  {% else %}
+                    <span class="status-pending">Pending</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted">No billing records available.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

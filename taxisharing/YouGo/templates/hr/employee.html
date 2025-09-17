@@ -1,0 +1,108 @@
+{% extends 'sitemaster.html' %}
+{% load static %}
+{% block title %}Employee Directory{% endblock %}
+
+{% block content %}
+<style>
+  .section-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .employee-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  }
+
+  .employee-table thead {
+    background-color: #0d6efd;
+    color: #ffffff;
+  }
+
+  .employee-table tbody tr:hover {
+    background-color: #f0f9ff;
+  }
+
+  .status-active {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .status-inactive {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .emp-photo {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #0d6efd;
+    margin-right: 10px;
+  }
+</style>
+
+<div class="container mb-5">
+  <h2 class="section-title">HR - Employee Directory</h2>
+
+  <div class="employee-card">
+    {% if employees %}
+      <div class="table-responsive">
+        <table class="table employee-table table-hover align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Employee</th>
+              <th>Department</th>
+              <th>Role</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for emp in employees %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td class="d-flex align-items-center">
+                  {% if emp.photo %}
+                    <img src="{{ emp.photo.url }}" class="emp-photo" alt="Photo">
+                  {% else %}
+                    <img src="{% static 'images/default-user.png' %}" class="emp-photo" alt="User">
+                  {% endif %}
+                  {{ emp.full_name }}
+                </td>
+                <td>{{ emp.department }}</td>
+                <td>{{ emp.role }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.phone }}</td>
+                <td>
+                  {% if emp.status == 'Active' %}
+                    <span class="status-active">Active</span>
+                  {% else %}
+                    <span class="status-inactive">Inactive</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="text-muted">No employees found.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
