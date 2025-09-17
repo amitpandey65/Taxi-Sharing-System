@@ -1,6 +1,28 @@
-taxisharing/
+# Python
 __pycache__/
 *.pyc
-db.sqlite3
-.taxisharing
+*.pyo
+*.pyd
 *.log
+
+# Virtual environment (replace with your venv folder name if different)
+venv/
+taxisharing/Lib/
+taxisharing/Scripts/
+
+# Django
+db.sqlite3
+media/
+staticfiles/
+*.pot
+
+# Environment variables
+.env
+
+# IDE settings
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
