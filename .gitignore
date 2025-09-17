@@ -3,26 +3,16 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.log
-
-# Virtual environment (replace with your venv folder name if different)
-venv/
-taxisharing/Lib/
-taxisharing/Scripts/
 
 # Django
 db.sqlite3
-media/
-staticfiles/
-*.pot
+*.log
 
-# Environment variables
-.env
+# Virtual environment
+venv/
+env/
+*.egg-info/
 
-# IDE settings
-.vscode/
-.idea/
-
-# OS files
-.DS_Store
-Thumbs.db
+# Static and media
+/media/
+/staticfiles/
